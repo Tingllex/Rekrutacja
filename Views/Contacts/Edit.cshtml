@@ -43,6 +43,16 @@
                     <input asp-for="OtherCategory" class="form-control" />
                     <span asp-validation-for="OtherCategory" class="text-danger"></span>
                 </div>
+                <div class="form-group" id="Hide2">
+                    @Html.LabelFor(model => model.OtherCategory, "Insert category:")
+                    <select id="selection" onchange="fun()" asp-for="OtherCategory" class="form-control">
+                        <option value="1">Customer</option>
+                        <option value="2">Boss</option>
+                        <option value="3">Employee</option>
+                    </select>
+
+                    <span asp-validation-for="OtherCategory" class="text-danger"></span>
+                </div>
                 <div class="form-group">
                     <label asp-for="PhoneNumber" class="control-label"></label>
                     <input asp-for="PhoneNumber" class="form-control" />
@@ -67,14 +77,25 @@
     @section Scripts {
         @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
+<script type="text/javascript">
+    function show() {
+        if ($("#selection :selected").text() == "Other") {
+            $("#Hide").show();
+            $("#Hide2").hide();
+        }
+        else if ($("#selection :selected").text() == "Business") {
+            $("#Hide2").show();
+            $("#Hide").hide();
+        }
+        else {
+            $("#Hide").hide();
+            $("#Hide2").hide();
+        }
+    }
+</script>
         <script type="text/javascript">
-            function show() {
-                if ($("#selection :selected").text() == "Other") {
-                    $("#Hide").show();
-                }
-                else {
-                    $("#Hide").hide();
-                }
+            function fun() {
+                //$("#plan").val(this.options[this.selectedIndex].text);
             }
         </script>
     }
